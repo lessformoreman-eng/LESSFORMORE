@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Campus Sutra ripped shirt | LESSFORMORE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -18,7 +19,6 @@
     <style>
         body { background-color: #F8F7F4; color: #111111; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
         .glass-header { background-color: rgba(248, 247, 244, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        .contain-product-img { object-fit: contain; width: 100%; height: 100%; max-height: 70vh; }
     </style>
 </head>
 <body class="font-sans antialiased">
@@ -29,6 +29,7 @@
                 <span class="font-serif text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
                 <span class="font-serif text-[10px] tracking-[0.25em] text-brandSecondary uppercase mt-1.5 block leading-none">Reviewed. Compared. Simplified.</span>
             </a>
+            <a href="reviews.html" class="text-xs uppercase tracking-widest text-brandSecondary hover:text-brandPrimary font-medium">← Back to Catalog</a>
         </div>
     </header>
 
@@ -38,37 +39,62 @@
             <h1 class="font-serif text-3xl sm:text-5xl tracking-tight leading-none uppercase">Campus Sutra ripped shirt</h1>
         </div>
 
-        <!-- TWO-COLUMN SECTION FOR VIDEO AND BUY MODULE (Brings Button Directly to Top-Fold) -->
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start mb-12 max-w-4xl mx-auto">
-            
-            <!-- Video Column Block -->
-            <div class="md:col-span-7 border border-brandBorder p-2 bg-white/40 w-full max-w-[340px] mx-auto md:max-w-none">
-                <div class="relative w-full overflow-hidden" style="padding-top: 177.77%;">
-                    <iframe class="absolute top-0 left-0 bottom-0 right-0 w-full h-full" src="https://www.youtube.com/embed/g7LvJuF" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="max-w-[360px] mx-auto flex flex-col gap-6 mb-16">
+            <!-- Dynamic Automated YouTube Cover Image Showcase Slot -->
+            <div class="border border-brandBorder p-3 bg-white w-full shadow-sm">
+                <div class="bg-brandBg aspect-[9/16] overflow-hidden border border-brandBorder/40 relative">
+                    <img src="https://img.youtube.com/vi/PHnAnxCAoNA/hqdefault.jpg" alt="Campus Sutra ripped shirt Visual Profile Cover" class="w-full h-full object-cover">
+                    <div class="absolute bottom-3 left-3 bg-brandPrimary/90 text-white text-[9px] tracking-widest uppercase px-2 py-1 font-medium">
+                        Fit Preview
+                    </div>
                 </div>
             </div>
 
-            <!-- Transaction Link Column Block (Placed Directly Below/Right of Video Block) -->
-            <div class="md:col-span-5 border border-brandBorder p-6 sm:p-8 bg-white w-full max-w-[340px] mx-auto md:max-w-none">
-                <span class="text-[9px] uppercase tracking-widest font-medium text-brandSecondary block mb-4 text-center">Verified Purchase Destination</span>
+            <!-- Video Player Block -->
+            <div class="border border-brandBorder p-2 bg-white/40 w-full">
+                <div class="relative w-full overflow-hidden" style="padding-top: 177.77%;">
+                    <iframe class="absolute top-0 left-0 bottom-0 right-0 w-full h-full shadow-inner" src="https://www.youtube.com/embed/PHnAnxCAoNA?autoplay=0&mute=0&rel=0&showinfo=0&playsinline=1&enablejsapi=1&origin=https://lessformore.in" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>
+
+            <!-- Transaction Link Card Block -->
+            <div class="border border-brandBorder p-6 bg-white w-full">
+                <span class="text-[9px] uppercase tracking-widest font-medium text-brandSecondary block mb-3 text-center">Verified Purchase Destination</span>
                 <a href="https://ajiio.in/g7LvJuF" target="_blank" rel="noopener noreferrer" class="min-h-[52px] w-full inline-flex items-center justify-center bg-brandPrimary text-white text-xs uppercase tracking-widest font-medium text-center active:bg-opacity-80 transition-all duration-200">
                     Buy on AJIO
                 </a>
-                <p class="text-[9px] text-brandSecondary font-light leading-relaxed tracking-wide mt-6 pt-4 border-t border-brandBorder text-center">
-                    This page contains affiliate links. We may earn a commission if you purchase through these links.
-                </p>
             </div>
         </div>
 
-        <!-- Product Image Showcase Layout - Preserves clothing silhouette proportions completely -->
-        <section class="max-w-4xl mx-auto mb-12">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 bg-white/30 border border-brandBorder p-4">
-                <div class="flex items-center justify-center bg-brandBg p-2 aspect-[3/4]">
-                    <img src="images/LFM004-front.jpg" alt="Front View" class="contain-product-img" onerror="this.src='https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop'">
-                </div>
-                <div class="flex items-center justify-center bg-brandBg p-2 aspect-[3/4]">
-                    <img src="images/LFM004-detail.jpg" alt="Detail View" class="contain-product-img" onerror="this.src='https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=800&auto=format&fit=crop'">
-                </div>
+        <!-- Recommendations Block -->
+        <section class="max-w-4xl mx-auto border-t border-brandBorder pt-12 mt-16 mb-12">
+            <h3 class="font-serif text-lg uppercase tracking-wider text-center mb-8">Complete The Uniform Framework</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                
+        <a href="review-lfm003.html" class="block bg-white border border-brandBorder p-3 hover:border-brandPrimary transition-all group">
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-3 border border-brandBorder/30">
+                <img src="https://img.youtube.com/vi/QxsK3lHyLmg/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
+            </div>
+            <span class="text-[9px] font-mono tracking-widest text-brandSecondary block mb-1">LFM003 / JEANS</span>
+            <span class="text-xs font-medium uppercase tracking-wide block truncate text-brandPrimary">Bene Kleed Beige Boot Cut Jeans</span>
+        </a>
+        
+        <a href="review-lfm006.html" class="block bg-white border border-brandBorder p-3 hover:border-brandPrimary transition-all group">
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-3 border border-brandBorder/30">
+                <img src="https://img.youtube.com/vi/Ofq2dD6wUA/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
+            </div>
+            <span class="text-[9px] font-mono tracking-widest text-brandSecondary block mb-1">LFM006 / JEANS</span>
+            <span class="text-xs font-medium uppercase tracking-wide block truncate text-brandPrimary">BENE KLEED Men Mid Rise Jeans</span>
+        </a>
+        
+        <a href="review-lfm009.html" class="block bg-white border border-brandBorder p-3 hover:border-brandPrimary transition-all group">
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-3 border border-brandBorder/30">
+                <img src="https://img.youtube.com/vi/1mncOSGu96l/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
+            </div>
+            <span class="text-[9px] font-mono tracking-widest text-brandSecondary block mb-1">LFM009 / JEANS</span>
+            <span class="text-xs font-medium uppercase tracking-wide block truncate text-brandPrimary">KOTTY Men Man Regular Fit Jeans</span>
+        </a>
+        
             </div>
         </section>
     </main>

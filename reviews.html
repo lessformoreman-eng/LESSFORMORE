@@ -1,154 +1,512 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Product Reviews | LESSFORMORE</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS Engine -->
+    <title>The Review Catalog | LESSFORMORE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: {
-                        serif: ['Cormorant Garamond', 'serif'],
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                    colors: {
-                        brandBg: '#F8F7F4',
-                        brandPrimary: '#111111',
-                        brandSecondary: '#6B7280',
-                        brandBorder: '#E5E7EB',
-                    }
+                    fontFamily: { serif: ['Cormorant Garamond', 'serif'], sans: ['Inter', 'sans-serif'] },
+                    colors: { brandBg: '#F8F7F4', brandPrimary: '#111111', brandSecondary: '#6B7280', brandBorder: '#E5E7EB' }
                 }
             }
         }
     </script>
-
     <style>
-        body {
-            background-color: #F8F7F4;
-            color: #111111;
-            overflow-x: hidden;
-            -webkit-tap-highlight-color: transparent;
-        }
-        .glass-header {
-            background-color: rgba(248, 247, 244, 0.9);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
+        body { background-color: #F8F7F4; color: #111111; -webkit-tap-highlight-color: transparent; }
+        .glass-header { background-color: rgba(248, 247, 244, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .filter-btn.active { border-color: #111111; color: #111111; font-weight: 500; }
     </style>
 </head>
 <body class="font-sans antialiased">
 
-    <!-- HEADER NAVIGATION -->
-    <header class="glass-header sticky top-0 z-50 border-b border-brandBorder w-full">
-        <div class="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 py-4 flex items-center justify-between">
-            <a href="index.html" class="flex flex-col">
-                <span class="font-serif text-xl sm:text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
+    <header class="glass-header sticky top-0 z-50 border-b border-brandBorder">
+        <div class="max-w-[1400px] mx-auto px-6 h-24 flex items-center justify-between">
+            <a href="index.html" class="flex flex-col py-2">
+                <span class="font-serif text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
+                <span class="font-serif text-[10px] tracking-[0.25em] text-brandSecondary uppercase mt-1.5 block leading-none">Reviewed. Compared. Simplified.</span>
             </a>
-
-            <!-- Desktop Links -->
-            <nav class="hidden md:flex items-center space-x-8 lg:space-x-12">
-                <a href="index.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Home</a>
-                <a href="reviews.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary border-b border-brandPrimary pb-1">Reviews</a>
-                <a href="best-of.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Best Of</a>
-                <a href="blueprints.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Outfits</a>
-                <a href="guides.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Guides</a>
-            </nav>
-
-            <div class="flex items-center space-x-2">
-                <button id="menu-toggle" aria-label="Toggle Menu" class="p-2 flex flex-col space-y-1.5 justify-center items-end w-6 h-6 relative z-50">
-                    <span id="line1" class="w-6 h-[1.5px] bg-brandPrimary block transition-transform duration-300"></span>
-                    <span id="line2" class="w-4 h-[1.5px] bg-brandPrimary block transition-transform duration-300"></span>
-                </button>
-            </div>
         </div>
     </header>
 
-    <!-- MOBILE OVERLAY DRAWER -->
-    <div id="mobile-menu" class="fixed inset-y-0 right-0 z-40 bg-brandBg transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between pt-28 pb-12 px-6 sm:px-12 border-l border-brandBorder w-full max-w-[320px] sm:max-w-md">
-        <nav class="flex flex-col space-y-5 text-left">
-            <a href="index.html" class="font-serif text-2xl tracking-wide text-brandSecondary pb-2">Home</a>
-            <a href="reviews.html" class="font-serif text-2xl tracking-wide text-brandPrimary font-medium border-b border-brandBorder pb-2">Reviews</a>
-            <a href="best-of.html" class="font-serif text-2xl tracking-wide text-brandSecondary pb-2">Best Of</a>
-            <a href="blueprints.html" class="font-serif text-2xl tracking-wide text-brandSecondary pb-2">Outfits</a>
-            <a href="guides.html" class="font-serif text-2xl tracking-wide text-brandSecondary pb-2">Guides</a>
-        </nav>
-    </div>
+    <main class="max-w-[1400px] mx-auto px-4 sm:px-8 py-12">
+        <div class="text-center mb-12">
+            <h1 class="font-serif text-4xl uppercase tracking-tight mb-4">The Configuration Catalog</h1>
+            <p class="text-xs text-brandSecondary uppercase tracking-[0.15em]">Filtered Analysis Matrices Across All 23 Essential Clothing Silhouettes</p>
+        </div>
 
-    <!-- MAIN GRID CONTAINER -->
-    <main class="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 py-8 sm:py-12">
-        <div class="mb-10 border-b border-brandBorder pb-6 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-            <div>
-                <span class="text-xs uppercase tracking-widest font-medium text-brandSecondary block mb-1">In-Depth Testing</span>
-                <h2 class="font-serif text-3xl sm:text-5xl tracking-tight">Rigorous Product Reviews</h2>
+        <div class="flex flex-wrap items-center justify-center gap-2 mb-12 max-w-3xl mx-auto px-2">
+            <button onclick="filterCategory('all')" class="filter-btn active text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">All Pieces</button>
+            <button onclick="filterCategory('Shirt')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Shirts</button>
+            <button onclick="filterCategory('T-Shirt')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">T-Shirts</button>
+            <button onclick="filterCategory('Jeans')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Jeans</button>
+            <button onclick="filterCategory('Trousers')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Trousers</button>
+            <button onclick="filterCategory('Pants')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Pants</button>
+            <button onclick="filterCategory('Shorts')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Shorts</button>
+            <button onclick="filterCategory('Footwear')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Footwear</button>
+        </div>
+
+        <section id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/cVrFyxfkVsA/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
             </div>
-            <p class="text-brandSecondary max-w-sm font-light text-sm tracking-wide leading-relaxed">
-                We wear them, wash them, and critique the structural composition so you spend your money intentionally[cite: 1].
-            </p>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM001</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">Snitch Twilight Blue Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
         </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 sm:gap-x-8 gap-y-12">
-            <!-- Review Card 1 (Snitch Twilight Blue Shirt) -->
-            <article class="flex flex-col group">
-                <div class="overflow-hidden aspect-[3/4] bg-zinc-100 mb-4 border border-brandBorder">
-                    <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=600" alt="Snitch Shirt" class="w-full h-full object-cover object-top">
-                </div>
-                <h3 class="font-serif text-2xl tracking-tight mb-2 uppercase">Snitch Twilight Blue Shirt</h3>
-                <p class="text-brandSecondary text-sm font-light leading-relaxed mb-4 flex-grow">Field testing the precise fabric drape, lightweight linen feel, and collar roll execution under high heat conditions.</p>
-                <a href="review-lfm001.html" class="w-full min-h-[48px] inline-flex items-center justify-center border border-brandBorder text-[11px] uppercase tracking-widest font-medium text-brandPrimary active:bg-brandPrimary active:text-white transition-all duration-200">Read Review</a>
-            </article>
-
-            <!-- Review Card 2 (British Club Shirt) -->
-            <article class="flex flex-col group">
-                <div class="overflow-hidden aspect-[3/4] bg-zinc-100 mb-4 border border-brandBorder">
-                    <img src="https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf?auto=format&fit=crop&q=80&w=600" alt="British Club Checked Shirt" class="w-full h-full object-cover object-top">
-                </div>
-                <h3 class="font-serif text-2xl tracking-tight mb-2 uppercase">British Club Checked Shirt</h3>
-                <p class="text-brandSecondary text-sm font-light leading-relaxed mb-4 flex-grow">Testing structural resilience and wash cycles of a slim fit everyday luxury plaid weave over a month.</p>
-                <a href="review-lfm002.html" class="w-full min-h-[48px] inline-flex items-center justify-center border border-brandBorder text-[11px] uppercase tracking-widest font-medium text-brandPrimary active:bg-brandPrimary active:text-white transition-all duration-200">Read Review</a>
-            </article>
-
-            <!-- Review Card 3 (Bene Kleed Jeans) -->
-            <article class="flex flex-col group">
-                <div class="overflow-hidden aspect-[3/4] bg-zinc-100 mb-4 border border-brandBorder">
-                    <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80&w=600" alt="Bene Kleed Bootcut Jeans" class="w-full h-full object-cover">
-                </div>
-                <h3 class="font-serif text-2xl tracking-tight mb-2 uppercase">Bene Kleed Beige Boot Cut</h3>
-                <p class="text-brandSecondary text-sm font-light leading-relaxed mb-4 flex-grow">Analyzing visual aspect ratios, pocket density, and flare architecture layout of premium mid-rise denim cuts.</p>
-                <a href="review-lfm003.html" class="w-full min-h-[48px] inline-flex items-center justify-center border border-brandBorder text-[11px] uppercase tracking-widest font-medium text-brandPrimary active:bg-brandPrimary active:text-white transition-all duration-200">Read Review</a>
-            </article>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm001.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/Pkz8ur6" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
         </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/Ef-KsWv6m9k/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM002</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">British Club Checked Slim Fit Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm002.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/bqRMXnK" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Jeans">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/QxsK3lHyLmg/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM003</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Jeans</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">Bene Kleed Beige Boot Cut Jeans</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm003.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/m6PDE1y" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/PHnAnxCAoNA/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM004</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">Campus Sutra ripped shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm004.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/g7LvJuF" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/9Wq5vP-WVds/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM005</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">The Bear House Men Checked Slim Fit Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm005.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/dd40lF7" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Jeans">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/Ofq2dD6wUA/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM006</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Jeans</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">BENE KLEED Men Mid Rise Jeans</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm006.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/m6PDE1y" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="T-Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/UQFditSw85M/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM007</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">T-Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">TEAMSPIRIT Men Regular Fit Polo T-Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm007.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/Th0DPJ1" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Footwear">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/euW2tlpedw4/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM008</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Footwear</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">Sparx Men Textured Thong Flip-Flops</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via Myntra</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm008.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://myntr.it/6FVQ6kG" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Jeans">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/1mncOSGu96l/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM009</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Jeans</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">KOTTY Men Man Regular Fit Jeans</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm009.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/6vl5L4D" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Pants">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/vhPRujBfvGc/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM010</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Pants</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">TEAMSPIRIT Men Straight Fit Track Pants</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm010.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/OfxykxE" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Footwear">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/FeXUB8eKI-0/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM011</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Footwear</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">YOUSTA Men Low-Top Lace-Up Sneakers</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm011.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/c1YyGIC" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/BQ5-FVvdtM/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM012</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">HERE&NOW Men Opaque Casual Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via Myntra</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm012.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://myntr.it/P4K2tZm" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="T-Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/eXTPg-KBbts/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM013</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">T-Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">PERFORMAX Ultra Lightweight Running T-Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm013.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/QHdsiN7" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Footwear">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/D3SjwXRRF2Y/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM014</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Footwear</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">HRX by Hrithik Roshan Mesh Running Shoes</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via Myntra</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm014.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://myntr.it/VbA6Y03" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/XOUFJXSbTFI/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM015</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">LEE COOPER Men Regular Fit Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm015.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/1BXhxvw" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Trousers">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/X54S1ZKNKNo/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM016</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Trousers</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">ARROW Men Tapered Fit Trousers</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm016.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/hm8nlwt" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="T-Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/eAM59L6kUCk/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM017</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">T-Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">PERFORMAX Men Regular Fit Crew-Neck T-Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm017.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/7xY81kA" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="T-Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/WFNFkdkPUmk/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM018</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">T-Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">PUMA Men's Slim Fit Polo T-Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm018.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/NelSc1y" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="T-Shirt">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/csFz2Ji2TW4/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM019</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">T-Shirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">KAPPA Regular Fit Polo T-Shirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm019.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/8em6eJH" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Footwear">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/BPajO78EeL4/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM020</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Footwear</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">PERFORMAX Men Dual-Strap Sandals</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm020.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/A6cLnxR" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Jeans">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/QvMXBtKmcno/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM021</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Jeans</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">SNITCH Men Lightly-Washed Straight Fit Jeans</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm021.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/s10UunX" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Shorts">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/OTHVp59BTs/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM022</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Shorts</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">PERFORMAX Men Regular Fit Shorts</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm022.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/Ouusp9r" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300" data-category="Pants">
+        <div>
+            <!-- Visual Thumb for the primary Filter Catalog Grid view -->
+            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/NUBxZdJGsTM/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </div>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM023</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Pants</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">Dockstreet Men Striped Black Track Pants</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via Flipkart</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm023.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://fktr.in/OuGo7te" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+        </section>
     </main>
 
     <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const line1 = document.getElementById('line1');
-        const line2 = document.getElementById('line2');
-        let isMenuOpen = false;
+        function filterCategory(category) {
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
 
-        menuToggle.addEventListener('click', () => {
-            isMenuOpen = !isMenuOpen;
-            if (isMenuOpen) {
-                mobileMenu.classList.remove('translate-x-full');
-                line1.classList.add('transform', 'rotate-45', 'translate-y-[4px]');
-                line2.classList.add('transform', '-rotate-45', '-translate-y-[3.5px]');
-                document.body.style.overflow = 'hidden';
-            } else {
-                mobileMenu.classList.add('translate-x-full');
-                line1.classList.remove('transform', 'rotate-45', 'translate-y-[4px]');
-                line2.classList.remove('transform', '-rotate-45', '-translate-y-[3.5px]');
-                document.body.style.overflow = '';
-            }
-        });
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
     </script>
+
 </body>
 </html>
