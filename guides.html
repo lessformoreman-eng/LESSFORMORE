@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Style Guides | LESSFORMORE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { serif: ['Cormorant Garamond', 'serif'], sans: ['Inter', 'sans-serif'] },
+                    colors: { brandBg: '#F8F7F4', brandPrimary: '#111111', brandSecondary: '#6B7280', brandBorder: '#E5E7EB' }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #F8F7F4; color: #111111; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }
+        .glass-header { background-color: rgba(248, 247, 244, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <header class="glass-header sticky top-0 z-50 border-b border-brandBorder w-full">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex flex-col">
+                <span class="font-serif text-xl sm:text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8 lg:space-x-12">
+                <a href="index.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary">Home</a>
+                <a href="reviews.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary">Reviews</a>
+                <a href="best-of.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary">Best Of</a>
+                <a href="blueprints.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary">Outfits</a>
+                <a href="guides.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary border-b border-brandPrimary pb-1">Guides</a>
+            </nav>
+            <button id="menu-toggle" aria-label="Toggle Menu" class="p-2 flex flex-col space-y-1.5 justify-center items-end w-6 h-6 relative z-50">
+                <span id="line1" class="w-6 h-[1.5px] bg-brandPrimary block transition-transform duration-300"></span>
+                <span id="line2" class="w-4 h-[1.5px] bg-brandPrimary block transition-transform duration-300"></span>
+            </button>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 z-40 bg-brandBg transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between pt-28 pb-12 px-6 sm:px-12 border-l border-brandBorder w-full max-w-[320px] sm:max-w-md">
+        <nav class="flex flex-col space-y-5 text-left">
+            <a href="index.html" class="font-serif text-2xl tracking-wide text-brandSecondary pb-2">Home</a>
+            <a href="reviews.html" class="font-serif text-2xl tracking-wide text-brandSecondary pb-2">Reviews</a>
+            <a href="best-of.html" class="font-serif text-2xl tracking-wide text-brandSecondary pb-2">Best Of</a>
+            <a href="blueprints.html" class="font-serif text-2xl tracking-wide text-brandSecondary pb-2">Outfits</a>
+            <a href="guides.html" class="font-serif text-2xl tracking-wide text-brandPrimary font-medium border-b border-brandBorder pb-2">Guides</a>
+        </nav>
+    </div>
+
+    <main class="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 py-8 sm:py-12">
+        <div class="mb-10 border-b border-brandBorder pb-6">
+            <span class="text-xs uppercase tracking-widest font-medium text-brandSecondary block mb-1">Structured Methodology</span>
+            <h2 class="font-serif text-3xl sm:text-5xl tracking-tight">The Modern Style Guides</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12">
+            <!-- Guide Entry 1 -->
+            <article class="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-start group">
+                <div class="sm:col-span-5 overflow-hidden aspect-[4/5] bg-zinc-100 border border-brandBorder">
+                    <img src="https://images.unsplash.com/photo-1552374196-1ab2a1c593e8?auto=format&fit=crop&q=80&w=400" alt="Capsule Wardrobe" class="w-full h-full object-cover">
+                </div>
+                <div class="sm:col-span-7 flex flex-col justify-center">
+                    <span class="text-[10px] tracking-widest uppercase font-medium text-brandSecondary mb-1">Volume 01</span>
+                    <h3 class="font-serif text-2xl tracking-tight mb-2 uppercase">How To Build A Capsule Wardrobe</h3>
+                    <p class="text-brandSecondary text-sm font-light leading-relaxed mb-4">A highly curated configuration architecture detailing the exact fifteen garment elements necessary for comprehensive seasonal versatility[cite: 1].</p>
+                    <a href="#" class="text-[11px] uppercase tracking-widest font-medium text-brandPrimary">Read Manual →</a>
+                </div>
+            </article>
+
+            <!-- Guide Entry 2 -->
+            <article class="grid grid-cols-1 sm:grid-cols-12 gap-4 sm:gap-6 items-start group">
+                <div class="sm:col-span-5 overflow-hidden aspect-[4/5] bg-zinc-100 border border-brandBorder">
+                    <img src="https://images.unsplash.com/photo-1618886614638-80e3c103d31a?auto=format&fit=crop&q=80&w=400" alt="Quiet Luxury Guide" class="w-full h-full object-cover">
+                </div>
+                <div class="sm:col-span-7 flex flex-col justify-center">
+                    <span class="text-[10px] tracking-widest uppercase font-medium text-brandSecondary mb-1">Volume 02</span>
+                    <h3 class="font-serif text-2xl tracking-tight mb-2 uppercase">Quiet Luxury Style Guide</h3>
+                    <p class="text-brandSecondary text-sm font-light leading-relaxed mb-4">Unpacking structural fabric parameters, minimal color blocking principles, and branding avoidance strategies[cite: 1].</p>
+                    <a href="#" class="text-[11px] uppercase tracking-widest font-medium text-brandPrimary">Read Manual →</a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+        menuToggle.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) { mobileMenu.classList.remove('translate-x-full'); } 
+            else { mobileMenu.classList.add('translate-x-full'); }
+        });
+    </script>
+</body>
+</html>
