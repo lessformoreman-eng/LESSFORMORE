@@ -42,13 +42,15 @@
     <main class="max-w-[1400px] mx-auto px-4 sm:px-8 py-12">
         <div class="text-center mb-12">
             <h1 class="font-serif text-4xl uppercase tracking-tight mb-4">The Configuration Catalog</h1>
-            <p class="text-xs text-brandSecondary uppercase tracking-[0.15em]">Filtered Analysis Matrices Across All 23 Essential Clothing Silhouettes</p>
+            <p class="text-xs text-brandSecondary uppercase tracking-[0.15em]">Filtered Analysis Matrices Across All Essential Clothing Silhouettes</p>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-2 mb-12 max-w-3xl mx-auto px-2">
             <button onclick="filterCategory('all')" class="filter-btn active text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">All Pieces</button>
             <button onclick="filterCategory('Shirt')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Shirts</button>
             <button onclick="filterCategory('T-Shirt')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">T-Shirts</button>
+            <button onclick="filterCategory('Vests')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Vests</button>
+            <button onclick="filterCategory('Sweatshirt')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Sweatshirts</button>
             <button onclick="filterCategory('Jeans')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Jeans</button>
             <button onclick="filterCategory('Trousers')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Trousers</button>
             <button onclick="filterCategory('Pants')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Pants</button>
@@ -472,6 +474,42 @@
         </div>
     </div>
     
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300 shadow-sm" data-category="Vests">
+        <div>
+            <a href="review-lfm024.html" class="block aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/x1JFt7G4o3w/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </a>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM024</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Vests</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">NETPLAY Men Pack of 2 Ribbed Sleeveless Vests</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm024.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/sEw2ri1" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
+    <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300 shadow-sm" data-category="Sweatshirt">
+        <div>
+            <a href="review-lfm025.html" class="block aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+                <img src="https://img.youtube.com/vi/DbPsC8k3zpM/hqdefault.jpg" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
+            </a>
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-[10px] font-mono tracking-widest text-brandSecondary">LFM025</span>
+                <span class="text-[9px] uppercase tracking-widest bg-brandBg px-2 py-0.5 border border-brandBorder text-brandSecondary">Sweatshirt</span>
+            </div>
+            <h3 class="font-serif text-lg uppercase tracking-tight leading-tight mb-1 text-brandPrimary">MISCHIEF MONKEY Men Regular Fit Sweatshirt</h3>
+            <span class="text-[10px] text-brandSecondary uppercase tracking-wider font-light">Via AJIO</span>
+        </div>
+        <div class="flex items-center justify-between pt-4 border-t border-brandBg mt-4">
+            <a href="review-lfm025.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary hover:text-brandSecondary transition-colors">Analysis Profile →</a>
+            <a href="https://ajiio.in/Kk2jSHG" target="_blank" rel="noopener noreferrer" class="text-[10px] uppercase tracking-widest text-brandSecondary hover:text-brandPrimary transition-colors">Buy Link</a>
+        </div>
+    </div>
+    
         </section>
     </main>
 
@@ -479,7 +517,7 @@
         function filterCategory(category) {
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            if(event) { event.target.classList.add('active'); }
 
             const cards = document.querySelectorAll('.product-card');
             cards.forEach(card => {
