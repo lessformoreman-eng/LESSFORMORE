@@ -1,6 +1,7 @@
 import os
+import glob
 
-# Complete, cleaned dataset matching your full product file data
+# Your full optimized product compilation dataset
 products = [
     {"code": "LFM001", "name": "Snitch Twilight Blue Shirt", "yt": "https://youtube.com/shorts/cVrFyxfkVsA", "affiliate": "https://ajiio.in/Pkz8ur6", "store": "AJIO", "category": "Shirt"},
     {"code": "LFM002", "name": "British Club Checked Slim Fit Shirt", "yt": "https://youtube.com/shorts/Ef-KsWv6m9k", "affiliate": "https://ajiio.in/bqRMXnK", "store": "AJIO", "category": "Shirt"},
@@ -24,12 +25,81 @@ products = [
     {"code": "LFM020", "name": "PERFORMAX Men Dual-Strap Sandals", "yt": "https://youtube.com/shorts/BPajO78EeL4", "affiliate": "https://ajiio.in/A6cLnxR", "store": "AJIO", "category": "Footwear"},
     {"code": "LFM021", "name": "SNITCH Men Lightly-Washed Straight Fit Jeans", "yt": "https://youtube.com/shorts/QvMXBtKmcno", "affiliate": "https://ajiio.in/s10UunX", "store": "AJIO", "category": "Jeans"},
     {"code": "LFM022", "name": "PERFORMAX Men Regular Fit Shorts", "yt": "https://youtube.com/shorts/OTHVp59BTs", "affiliate": "https://ajiio.in/Ouusp9r", "store": "AJIO", "category": "Shorts"},
-    {"code": "LFM023", "name": "Dockstreet Men Striped Black Track Pants", "yt": "https://youtube.com/shorts/NUBxZdJGsTM", "affiliate": "https://fktr.in/OuGo7te", "store": "Flipkart", "category": "Pants"}
+    {"code": "LFM023", "name": "Dockstreet Men Striped Black Track Pants", "yt": "https://youtube.com/shorts/NUBxZdJGsTM", "affiliate": "https://fktr.in/OuGo7te", "store": "Flipkart", "category": "Pants"},
+    {"code": "LFM024", "name": "NETPLAY Men Pack of 2 Ribbed Sleeveless Vests", "yt": "https://youtube.com/shorts/x1JFt7G4o3w", "affiliate": "https://ajiio.in/sEw2ri1", "store": "AJIO", "category": "Vests"},
+    {"code": "LFM025", "name": "MISCHIEF MONKEY Men Regular Fit Sweatshirt", "yt": "https://youtu.be/DbPsC8k3zpM", "affiliate": "https://ajiio.in/Kk2jSHG", "store": "AJIO", "category": "Sweatshirt"}
 ]
 
-# Locked in with your precise Google Tracking Key
 GA_TRACKING_ID = "G-F3YXR4NZHB"
 
+# Create review images folder path if it does not exist
+if not os.path.exists("review_images"):
+    os.makedirs("review_images")
+
+# Global Search script injection component
+GLOBAL_SEARCH_HTML = """
+<div class="relative w-full max-w-xs sm:max-w-sm">
+    <input type="text" id="global-search" oninput="handleGlobalSearch(event)" placeholder="SEARCH DESIGNS..." 
+           class="w-full bg-transparent border border-brandBorder px-4 py-2 text-xs focus:outline-none focus:border-brandPrimary transition-colors placeholder:text-gray-400 uppercase tracking-widest font-sans">
+    <div id="global-search-results" class="absolute left-0 right-0 mt-1 bg-white border border-brandBorder shadow-lg max-h-60 overflow-y-auto hidden z-50"></div>
+</div>
+
+<script>
+    const globalProducts = {products_json};
+
+    function handleGlobalSearch(e) {
+        const query = e.target.value.toLowerCase().trim();
+        const resultsDiv = document.getElementById('global-search-results');
+        if (!resultsDiv) return;
+        
+        if (!query) {
+            resultsDiv.innerHTML = '';
+            resultsDiv.classList.add('hidden');
+            return;
+        }
+
+        const queryWords = query.split(/\s+/);
+        const filtered = globalProducts.filter(p => {
+            const combinedText = (p.name + ' ' + p.code + ' ' + p.store + ' ' + p.category).toLowerCase();
+            return queryWords.every(word => {
+                return combinedText.includes(word) || 
+                       word.split('').filter(char => combinedText.includes(word.replace(char, ''))).length > 0;
+            });
+        });
+
+        if (filtered.length === 0) {
+            resultsDiv.innerHTML = '<div class="p-3 text-[10px] uppercase tracking-wider text-brandSecondary">No matching pieces</div>';
+        } else {
+            let html = '';
+            filtered.forEach(p => {
+                html += `<a href="review-${p.code.toLowerCase()}.html" class="block p-3 border-b border-brandBorder hover:bg-brandBg transition-colors">
+                    <div class="flex items-center justify-between">
+                        <span class="font-serif text-xs text-brandPrimary uppercase">${p.name}</span>
+                        <span class="text-[9px] font-mono tracking-wider bg-brandBg px-1 border border-brandBorder text-brandSecondary">${p.code}</span>
+                    </div>
+                </a>`;
+            });
+            resultsDiv.innerHTML = html;
+        }
+        resultsDiv.classList.remove('hidden');
+    }
+
+    // Close results when clicking outside
+    document.addEventListener('click', function(event) {
+        const resultsDiv = document.getElementById('global-search-results');
+        const searchInput = document.getElementById('global-search');
+        if (resultsDiv && !resultsDiv.contains(event.target) && event.target !== searchInput) {
+            resultsDiv.classList.add('hidden');
+        }
+    });
+</script>
+"""
+
+import json
+products_json_str = json.dumps(products)
+search_bar_configured = GLOBAL_SEARCH_HTML.replace("{products_json}", products_json_str)
+
+# --- INDIVIDUAL REVIEW ASSETS COMPILER ---
 review_template = """<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -43,7 +113,12 @@ review_template = """<!DOCTYPE html>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <title>{name} | LESSFORMORE</title>
+    
+    <title>{name} Review & Affiliate Links | LESSFORMORE</title>
+    <meta name="description" content="In-depth, independent clothing fit profile and size evaluation review for {name} from {store}. Find direct buy links and uniform setups.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://lessformore.in/review-{code_lower}.html">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {{
@@ -57,18 +132,21 @@ review_template = """<!DOCTYPE html>
     </script>
     <style>
         body {{ background-color: #F8F7F4; color: #111111; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }}
-        .glass-header {{ background-color: rgba(248, 247, 244, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }}
+        .glass-header {{ background-color: rgba(248, 247, 244, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }}
     </style>
 </head>
 <body class="font-sans antialiased">
 
     <header class="glass-header sticky top-0 z-50 border-b border-brandBorder">
-        <div class="max-w-[1400px] mx-auto px-6 h-24 flex items-center justify-between">
-            <a href="index.html" class="flex flex-col py-2">
-                <span class="font-serif text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
-                <span class="font-serif text-[10px] tracking-[0.25em] text-brandSecondary uppercase mt-1.5 block leading-none">Reviewed. Compared. Simplified.</span>
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-8 py-4 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex flex-col shrink-0">
+                <span class="font-serif text-xl sm:text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
+                <span class="font-serif text-[8px] sm:text-[9px] tracking-[0.22em] text-brandSecondary uppercase mt-1.5 block leading-none">Reviewed. Compared. Simplified.</span>
             </a>
-            <a href="reviews.html" class="text-xs uppercase tracking-widest text-brandSecondary hover:text-brandPrimary font-medium">← Back to Catalog</a>
+            
+            {global_search}
+            
+            <a href="reviews.html" class="text-xs uppercase tracking-widest text-brandSecondary hover:text-brandPrimary font-medium hidden sm:inline-block shrink-0">← Catalog</a>
         </div>
     </header>
 
@@ -82,17 +160,19 @@ review_template = """<!DOCTYPE html>
             
             <div class="md:col-span-7 flex flex-col gap-6 w-full">
                 <div class="border border-brandBorder p-3 bg-white w-full shadow-sm">
-                    <div class="bg-brandBg aspect-[9/16] overflow-hidden border border-brandBorder/40 relative">
+                    <div class="bg-brandBg overflow-hidden border border-brandBorder/40 relative {aspect_class}">
                         <img src="{thumb_url}" alt="{name} Visual Profile Cover" class="w-full h-full object-cover">
-                        <div class="absolute bottom-3 left-3 bg-brandPrimary/90 text-white text-[9px] tracking-widest uppercase px-2 py-1 font-medium">Fit Preview</div>
+                        <div class="absolute bottom-3 left-3 bg-brandPrimary/90 text-white text-[9px] tracking-widest uppercase px-2 py-1 font-medium">Cover Profile</div>
                     </div>
                 </div>
 
                 <div class="border border-brandBorder p-2 bg-white/40 w-full">
-                    <div class="relative w-full overflow-hidden" style="padding-top: 177.77%;">
+                    <div class="relative w-full overflow-hidden" style="{padding_style}">
                         <iframe class="absolute top-0 left-0 bottom-0 right-0 w-full h-full shadow-inner" src="{embed_url}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     </div>
                 </div>
+                
+                {custom_gallery_html}
             </div>
 
             <div class="md:col-span-5 w-full md:sticky md:top-32">
@@ -121,27 +201,81 @@ review_template = """<!DOCTYPE html>
 </html>
 """
 
-# Compile loop with smart YouTube image generation hooks
 for prod in products:
     raw_url = prod["yt"].strip().replace(" ", "")
-    video_id = raw_url.split("/shorts/")[-1].split("?")[0]
     
-    youtube_thumb = f"https://img.youtube.com/vi/{video_id}/hqdefault.jpg"
+    # 1. DYNAMIC RATIO RECOGNITION ARCHITECTURE
+    is_shorts = "/shorts/" in raw_url
+    
+    # Safely isolate character ID codes across watch/short variables
+    if "/shorts/" in raw_url:
+        video_id = raw_url.split("/shorts/")[-1].split("?")[0]
+    elif "watch?v=" in raw_url:
+        video_id = raw_url.split("watch?v=")[-1].split("?")[0]
+    else:
+        video_id = raw_url.split("/")[-1].split("?")[0]
+
+    # Assign correct frame ratios and padding spaces safely
+    if is_shorts:
+        aspect_class = "aspect-[9/16]"
+        padding_style = "padding-top: 177.77%;"
+        youtube_thumb = f"https://img.youtube.com/vi/{video_id}/hqdefault.jpg"
+    else:
+        aspect_class = "aspect-video"  # 16:9 Standard Wide Layout
+        padding_style = "padding-top: 56.25%;"
+        youtube_thumb = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
+
     bulletproof_embed = f"https://www.youtube.com/embed/{video_id}?autoplay=0&mute=0&rel=0&showinfo=0&playsinline=1&enablejsapi=1&origin=https://lessformore.in"
     
-    if prod["category"] in ["Shirt", "T-Shirt"]:
-        rec_items = [p for p in products if p["category"] in ["Jeans", "Trousers", "Pants"]][:3]
+    # 2. FILE-SYSTEM DROPBOX FOLDER IMAGES SCANNER
+    code_lower = prod["code"].lower()
+    discovered_images = []
+    # Search for matching product photo names inside review_images path
+    for ext in ["jpg", "jpeg", "png", "webp", "JPG", "PNG"]:
+        found_files = glob.glob(f"review_images/{code_lower}_*.{ext}")
+        discovered_images.extend(found_files)
+    
+    # Sort files naturally by sequence indexes
+    discovered_images.sort()
+    
+    gallery_html = ""
+    if discovered_images:
+        gallery_html += '<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">'
+        for img_path in discovered_images:
+            # Re-normalize slashes safely for cross-platform rendering
+            normalized_path = img_path.replace("\\", "/")
+            gallery_html += f"""
+            <div class="border border-brandBorder p-2 bg-white shadow-sm">
+                <div class="overflow-hidden aspect-[4/5] bg-brandBg border border-brandBorder/40">
+                    <img src="{normalized_path}" class="w-full h-full object-cover">
+                </div>
+            </div>
+            """
+        gallery_html += '</div>'
+        
+    if prod["category"] in ["Shirt", "T-Shirt", "Vests", "Sweatshirt"]:
+        rec_items = [p for p in products if p["category"] in ["Jeans", "Trousers", "Pants", "Shorts"]][:3]
     else:
-        rec_items = [p for p in products if p["category"] in ["Shirt", "T-Shirt"]][:3]
+        rec_items = [p for p in products if p["category"] in ["Shirt", "T-Shirt", "Vests", "Sweatshirt"]][:3]
         
     rec_html = ""
     for r in rec_items:
-        r_id = r["yt"].strip().replace(" ", "").split("/shorts/")[-1].split("?")[0]
-        r_thumb = f"https://img.youtube.com/vi/{r_id}/hqdefault.jpg"
-        
+        r_url = r["yt"].strip().replace(" ", "")
+        if "/shorts/" in r_url:
+            r_id = r_url.split("/shorts/")[-1].split("?")[0]
+            r_aspect = "aspect-[9/16]"
+            r_thumb = f"https://img.youtube.com/vi/{r_id}/hqdefault.jpg"
+        else:
+            if "watch?v=" in r_url:
+                r_id = r_url.split("watch?v=")[-1].split("?")[0]
+            else:
+                r_id = r_url.split("/")[-1].split("?")[0]
+            r_aspect = "aspect-video"
+            r_thumb = f"https://img.youtube.com/vi/{r_id}/mqdefault.jpg"
+            
         rec_html += f"""
         <a href="review-{r['code'].lower()}.html" class="block bg-white border border-brandBorder p-3 hover:border-brandPrimary transition-all group shadow-sm">
-            <div class="aspect-[9/16] bg-brandBg overflow-hidden mb-3 border border-brandBorder/30">
+            <div class="{r_aspect} bg-brandBg overflow-hidden mb-3 border border-brandBorder/30">
                 <img src="{r_thumb}" class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300">
             </div>
             <span class="text-[9px] font-mono tracking-widest text-brandSecondary block mb-1">{r['code']} / {r['category'].upper()}</span>
@@ -151,20 +285,180 @@ for prod in products:
         
     page_content = review_template.replace("{ga_id}", GA_TRACKING_ID).format(
         code=prod["code"],
+        code_lower=code_lower,
         name=prod["name"],
+        aspect_class=aspect_class,
+        padding_style=padding_style,
         thumb_url=youtube_thumb,
         embed_url=bulletproof_embed,
         affiliate=prod["affiliate"].strip(),
         store=prod["store"],
+        custom_gallery_html=gallery_html,
+        global_search=search_bar_configured,
         recommendations_html=rec_html
     )
     
-    with open(f"review-{prod['code'].lower()}.html", "w", encoding="utf-8") as f:
+    with open(f"review-{code_lower}.html", "w", encoding="utf-8") as f:
         f.write(page_content)
 
-# -------------------------------------------------------------------------
-# THE CENTRAL CATALOG INDEX ARCHITECTURE WITH INTERACTIVE LIVE FILTER BAR
-# -------------------------------------------------------------------------
+
+# --- 3. HOMEPAGE CATALOG INDEX REBUILDER ---
+homepage_html = """<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id={ga_id}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){{dataLayer.push(arguments);}}
+      gtag('js', new Date());
+      gtag('config', '{ga_id}');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LESSFORMORE | Men's Fashion Editorial</title>
+    <meta name="description" content="Helping men build better wardrobes and make smarter buying decisions. Independent fashion curation.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {{
+            theme: {{
+                extend: {{
+                    fontFamily: {{
+                        serif: ['Cormorant Garamond', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    }},
+                    colors: {{
+                        brandBg: '#F8F7F4',
+                        brandPrimary: '#111111',
+                        brandSecondary: '#6B7280',
+                        brandBorder: '#E5E7EB',
+                    }}
+                }}
+            }}
+        }}
+    </script>
+
+    <style>
+        body {{ background-color: #F8F7F4; color: #111111; overflow-x: hidden; -webkit-tap-highlight-color: transparent; }}
+        .glass-header {{ background-color: rgba(248, 247, 244, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }}
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <header class="glass-header sticky top-0 z-50 border-b border-brandBorder w-full">
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16 py-4 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex flex-col shrink-0">
+                <span class="font-serif text-xl sm:text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
+                <span class="font-serif text-[8px] sm:text-[9px] tracking-[0.22em] text-brandSecondary uppercase mt-1.5 block leading-none">Reviewed. Compared. Simplified.</span>
+            </a>
+
+            {global_search}
+
+            <nav class="hidden md:flex items-center space-x-8 lg:space-x-12 shrink-0">
+                <a href="index.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary border-b border-brandPrimary pb-1">Home</a>
+                <a href="reviews.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Reviews</a>
+                <a href="best-of.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Best Of</a>
+                <a href="blueprints.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Outfits</a>
+                <a href="guides.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Guides</a>
+            </nav>
+
+            <div class="flex items-center space-x-2">
+                <button id="menu-toggle" aria-label="Toggle Menu" class="p-2 flex flex-col space-y-1.5 justify-center items-end w-6 h-6 relative z-50">
+                    <span id="line1" class="w-6 h-[1.5px] bg-brandPrimary block transition-transform duration-300"></span>
+                    <span id="line2" class="w-4 h-[1.5px] bg-brandPrimary block transition-transform duration-300"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="fixed inset-y-0 right-0 z-40 bg-brandBg transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between pt-28 pb-12 px-6 sm:px-12 border-l border-brandBorder w-full max-w-[320px] sm:max-w-md">
+        <nav class="flex flex-col space-y-5 text-left">
+            <a href="index.html" class="font-serif text-2xl tracking-wide text-brandPrimary font-medium border-b border-brandBorder pb-2">Home</a>
+            <a href="reviews.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Reviews</a>
+            <a href="best-of.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Best Of</a>
+            <a href="blueprints.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Outfits</a>
+            <a href="guides.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Guides</a>
+        </nav>
+        <div class="border-t border-brandBorder pt-6">
+            <p class="font-serif text-xs tracking-[0.25em] text-brandSecondary uppercase">Quality Over Quantity.</p>
+        </div>
+    </div>
+
+    <main class="max-w-[1400px] mx-auto px-4 sm:px-8 lg:px-16">
+        <section class="py-8 sm:py-16 lg:py-24 border-b border-brandBorder">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <div class="lg:col-span-6 flex flex-col justify-center order-2 lg:order-1">
+                    <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl xl:text-8xl tracking-tight leading-[1.05] sm:leading-[0.95] mb-4 sm:mb-6">
+                        Dress Better.<br>Buy Smarter.
+                    </h1>
+                    <p class="text-brandSecondary text-sm sm:text-base lg:text-lg font-light tracking-wide max-w-md mb-6 sm:mb-10 leading-relaxed">
+                        Helping men build better wardrobes and make smarter buying decisions. Independent curation, thoroughly field-tested.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-3 w-full sm:max-w-md">
+                        <a href="reviews.html" class="min-h-[48px] sm:min-h-[52px] w-full flex items-center justify-center bg-brandPrimary text-white text-xs uppercase tracking-widest font-medium active:bg-opacity-80 transition-all">
+                            Browse Reviews
+                        </a>
+                        <a href="guides.html" class="min-h-[48px] sm:min-h-[52px] w-full flex items-center justify-center border border-brandPrimary text-brandPrimary text-xs uppercase tracking-widest font-medium active:bg-brandPrimary active:text-white transition-all">
+                            Explore Guides
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-6 order-1 lg:order-2">
+                    <div class="overflow-hidden bg-zinc-100 aspect-[4/3] lg:aspect-[3/4] max-w-xl mx-auto w-full relative border border-brandBorder">
+                        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=1200" alt="Menswear Editorial Curation" class="w-full h-full object-cover object-top">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-10 border-b border-brandBorder">
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 sm:gap-8 text-center">
+                <div><span class="font-serif text-2xl sm:text-4xl block mb-0.5">30+</span><span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-medium text-brandSecondary">Reviews Published</span></div>
+                <div><span class="font-serif text-2xl sm:text-4xl block mb-0.5">100+</span><span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-medium text-brandSecondary">Products Tested</span></div>
+                <div><span class="font-serif text-2xl sm:text-4xl block mb-0.5">Real</span><span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-medium text-brandSecondary">Purchases Made</span></div>
+                <div><span class="font-serif text-2xl sm:text-4xl block mb-0.5">Zero</span><span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-medium text-brandSecondary">Sponsored Ratings</span></div>
+                <div><span class="font-serif text-2xl sm:text-4xl block mb-0.5">100%</span><span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-medium text-brandSecondary">Independent</span></div>
+                <div><span class="font-serif text-2xl sm:text-4xl block mb-0.5">Honest</span><span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-medium text-brandSecondary">Recommendations</span></div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const line1 = document.getElementById('line1');
+        const line2 = document.getElementById('line2');
+        let isMenuOpen = false;
+
+        menuToggle.addEventListener('click', () => {{
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {{
+                mobileMenu.classList.remove('translate-x-full');
+                line1.classList.add('transform', 'rotate-45', 'translate-y-[4px]');
+                line2.classList.add('transform', '-rotate-45', '-translate-y-[3.5px]');
+                document.body.style.overflow = 'hidden';
+            }} else {{
+                mobileMenu.classList.add('translate-x-full');
+                line1.classList.remove('transform', 'rotate-45', 'translate-y-[4px]');
+                line2.classList.remove('transform', '-rotate-45', '-translate-y-[3.5px]');
+                document.body.style.overflow = '';
+            }}
+        }});
+    </script>
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(homepage_html.format(ga_id=GA_TRACKING_ID, global_search=search_bar_configured))
+
+
+# --- CATALOG LIST MATRIX GENERATOR ---
 catalog_template = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -177,7 +471,11 @@ catalog_template = """<!DOCTYPE html>
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
     <title>The Review Catalog | LESSFORMORE</title>
+    <meta name="description" content="Browse and search independent analysis matrices for quality apparel.">
+    <meta name="robots" content="index, follow">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {{
@@ -191,31 +489,35 @@ catalog_template = """<!DOCTYPE html>
     </script>
     <style>
         body {{ background-color: #F8F7F4; color: #111111; -webkit-tap-highlight-color: transparent; }}
-        .glass-header {{ background-color: rgba(248, 247, 244, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }}
+        .glass-header {{ background-color: rgba(248, 247, 244, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }}
         .filter-btn.active {{ border-color: #111111; color: #111111; font-weight: 500; }}
     </style>
 </head>
 <body class="font-sans antialiased">
 
     <header class="glass-header sticky top-0 z-50 border-b border-brandBorder">
-        <div class="max-w-[1400px] mx-auto px-6 h-24 flex items-center justify-between">
-            <a href="index.html" class="flex flex-col py-2">
-                <span class="font-serif text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
-                <span class="font-serif text-[10px] tracking-[0.25em] text-brandSecondary uppercase mt-1.5 block leading-none">Reviewed. Compared. Simplified.</span>
+        <div class="max-w-[1400px] mx-auto px-4 sm:px-8 py-4 flex items-center justify-between gap-4">
+            <a href="index.html" class="flex flex-col shrink-0">
+                <span class="font-serif text-xl sm:text-2xl tracking-widest font-medium uppercase leading-none block">LESSFORMORE</span>
+                <span class="font-serif text-[8px] sm:text-[9px] tracking-[0.22em] text-brandSecondary uppercase mt-1.5 block leading-none">Reviewed. Compared. Simplified.</span>
             </a>
+            
+            {global_search}
         </div>
     </header>
 
     <main class="max-w-[1400px] mx-auto px-4 sm:px-8 py-12">
-        <div class="text-center mb-12">
+        <div class="text-center mb-8">
             <h1 class="font-serif text-4xl uppercase tracking-tight mb-4">The Configuration Catalog</h1>
-            <p class="text-xs text-brandSecondary uppercase tracking-[0.15em]">Filtered Analysis Matrices Across All 23 Essential Clothing Silhouettes</p>
+            <p class="text-xs text-brandSecondary uppercase tracking-[0.15em]">Filtered Analysis Matrices Across Essential Clothing Silhouettes</p>
         </div>
 
         <div class="flex flex-wrap items-center justify-center gap-2 mb-12 max-w-3xl mx-auto px-2">
             <button onclick="filterCategory('all')" class="filter-btn active text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">All Pieces</button>
             <button onclick="filterCategory('Shirt')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Shirts</button>
             <button onclick="filterCategory('T-Shirt')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">T-Shirts</button>
+            <button onclick="filterCategory('Vests')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Vests</button>
+            <button onclick="filterCategory('Sweatshirt')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Sweatshirts</button>
             <button onclick="filterCategory('Jeans')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Jeans</button>
             <button onclick="filterCategory('Trousers')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Trousers</button>
             <button onclick="filterCategory('Pants')" class="filter-btn text-[11px] uppercase tracking-widest px-4 py-2 border border-brandBorder bg-white text-brandSecondary hover:border-brandPrimary transition-all">Pants</button>
@@ -229,14 +531,25 @@ catalog_template = """<!DOCTYPE html>
     </main>
 
     <script>
+        let currentSelectedCategory = 'all';
+
         function filterCategory(category) {{
+            currentSelectedCategory = category;
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
+            
+            if(event && event.target.classList.contains('filter-btn')) {{ 
+                event.target.classList.add('active'); 
+            }}
 
+            executeGridFiltering();
+        }}
+
+        function executeGridFiltering() {{
             const cards = document.querySelectorAll('.product-card');
             cards.forEach(card => {{
-                if (category === 'all' || card.getAttribute('data-category') === category) {{
+                const category = card.getAttribute('data-category');
+                if (currentSelectedCategory === 'all' || category === currentSelectedCategory) {{
                     card.style.display = 'flex';
                 }} else {{
                     card.style.display = 'none';
@@ -251,13 +564,23 @@ catalog_template = """<!DOCTYPE html>
 
 catalog_html = ""
 for prod in products:
-    c_id = prod["yt"].strip().replace(" ", "").split("/shorts/")[-1].split("?")[0]
-    c_thumb = f"https://img.youtube.com/vi/{c_id}/hqdefault.jpg"
+    c_url = prod["yt"].strip().replace(" ", "")
+    if "/shorts/" in c_url:
+        c_id = c_url.split("/shorts/")[-1].split("?")[0]
+        c_aspect = "aspect-[9/16]"
+        c_thumb = f"https://img.youtube.com/vi/{c_id}/hqdefault.jpg"
+    else:
+        if "watch?v=" in c_url:
+            c_id = c_url.split("watch?v=")[-1].split("?")[0]
+        else:
+            c_id = c_url.split("/")[-1].split("?")[0]
+        c_aspect = "aspect-video"
+        c_thumb = f"https://img.youtube.com/vi/{c_id}/mqdefault.jpg"
     
     catalog_html += f"""
     <div class="product-card border border-brandBorder bg-white p-4 flex flex-col justify-between group hover:border-brandPrimary transition-all duration-300 shadow-sm" data-category="{prod['category']}">
         <div>
-            <a href="review-{prod['code'].lower()}.html" class="block aspect-[9/16] bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
+            <a href="review-{prod['code'].lower()}.html" class="block {c_aspect} bg-brandBg overflow-hidden mb-4 border border-brandBorder/30 relative">
                 <img src="{c_thumb}" class="w-full h-full object-cover group-hover:scale-[1.01] transition-transform duration-300">
             </a>
             <div class="flex items-center justify-between mb-2">
@@ -275,6 +598,6 @@ for prod in products:
     """
 
 with open("reviews.html", "w", encoding="utf-8") as f:
-    f.write(catalog_template.replace("{ga_id}", GA_TRACKING_ID).format(catalog_products_html=catalog_html))
+    f.write(catalog_template.replace("{ga_id}", GA_TRACKING_ID).format(global_search=search_bar_configured, catalog_products_html=catalog_html))
 
-print("Success: Overhauled side-by-side grids, clickable thumbnail maps, and tracking systems across all assets!")
+print("Success: System successfully synchronized. Layouts, responsive video ratios, image galleries, and search functions are updated across all pages!")
