@@ -52,70 +52,18 @@
                 <span class="font-serif text-[8px] sm:text-[9px] tracking-[0.22em] text-brandSecondary uppercase mt-1.5 block leading-none">Reviewed. Compared. Simplified.</span>
             </a>
 
-            
-<div class="relative w-full max-w-xs sm:max-w-sm">
-    <input type="text" id="global-search" oninput="handleGlobalSearch(event)" placeholder="SEARCH DESIGNS..." 
-           class="w-full bg-transparent border border-brandBorder px-4 py-2 text-xs focus:outline-none focus:border-brandPrimary transition-colors placeholder:text-gray-400 uppercase tracking-widest font-sans">
-    <div id="global-search-results" class="absolute left-0 right-0 mt-1 bg-white border border-brandBorder shadow-lg max-h-60 overflow-y-auto hidden z-50"></div>
-</div>
-
-<script>
-    const globalProducts = [{"code": "LFM001", "name": "Snitch Twilight Blue Shirt", "yt": "https://youtube.com/shorts/cVrFyxfkVsA", "affiliate": "https://ajiio.in/Pkz8ur6", "store": "AJIO", "category": "Shirt"}, {"code": "LFM002", "name": "British Club Checked Slim Fit Shirt", "yt": "https://youtube.com/shorts/Ef-KsWv6m9k", "affiliate": "https://ajiio.in/bqRMXnK", "store": "AJIO", "category": "Shirt"}, {"code": "LFM003", "name": "Bene Kleed Beige Boot Cut Jeans", "yt": "https://youtube.com/shorts/QxsK3lHyLmg", "affiliate": "https://ajiio.in/m6PDE1y", "store": "AJIO", "category": "Jeans"}, {"code": "LFM004", "name": "Campus Sutra ripped shirt", "yt": "https://youtube.com/shorts/PHnAnxCAoNA", "affiliate": "https://ajiio.in/g7LvJuF", "store": "AJIO", "category": "Shirt"}, {"code": "LFM005", "name": "The Bear House Men Checked Slim Fit Shirt", "yt": "https://youtube.com/shorts/9Wq5vP-WVds", "affiliate": "https://ajiio.in/dd40lF7", "store": "AJIO", "category": "Shirt"}, {"code": "LFM006", "name": "BENE KLEED Men Mid Rise Jeans", "yt": "https://youtube.com/shorts/Ofq2dD6wUA", "affiliate": "https://ajiio.in/m6PDE1y", "store": "AJIO", "category": "Jeans"}, {"code": "LFM007", "name": "TEAMSPIRIT Men Regular Fit Polo T-Shirt", "yt": "https://youtube.com/shorts/UQFditSw85M", "affiliate": "https://ajiio.in/Th0DPJ1", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM008", "name": "Sparx Men Textured Thong Flip-Flops", "yt": "https://youtube.com/shorts/euW2tlpedw4", "affiliate": "https://myntr.it/6FVQ6kG", "store": "Myntra", "category": "Footwear"}, {"code": "LFM009", "name": "KOTTY Men Man Regular Fit Jeans", "yt": "https://youtube.com/shorts/1mncOSGu96l", "affiliate": "https://ajiio.in/6vl5L4D", "store": "AJIO", "category": "Jeans"}, {"code": "LFM010", "name": "TEAMSPIRIT Men Straight Fit Track Pants", "yt": "https://youtube.com/shorts/vhPRujBfvGc", "affiliate": "https://ajiio.in/OfxykxE", "store": "AJIO", "category": "Pants"}, {"code": "LFM011", "name": "YOUSTA Men Low-Top Lace-Up Sneakers", "yt": "https://youtube.com/shorts/FeXUB8eKI-0", "affiliate": "https://ajiio.in/c1YyGIC", "store": "AJIO", "category": "Footwear"}, {"code": "LFM012", "name": "HERE&NOW Men Opaque Casual Shirt", "yt": "https://youtube.com/shorts/BQ5-FVvdtM", "affiliate": "https://myntr.it/P4K2tZm", "store": "Myntra", "category": "Shirt"}, {"code": "LFM013", "name": "PERFORMAX Ultra Lightweight Running T-Shirt", "yt": "https://youtube.com/shorts/eXTPg-KBbts", "affiliate": "https://ajiio.in/QHdsiN7", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM014", "name": "HRX by Hrithik Roshan Mesh Running Shoes", "yt": "https://youtube.com/shorts/D3SjwXRRF2Y", "affiliate": "https://myntr.it/VbA6Y03", "store": "Myntra", "category": "Footwear"}, {"code": "LFM015", "name": "LEE COOPER Men Regular Fit Shirt", "yt": "https://youtube.com/shorts/XOUFJXSbTFI", "affiliate": "https://ajiio.in/1BXhxvw", "store": "AJIO", "category": "Shirt"}, {"code": "LFM016", "name": "ARROW Men Tapered Fit Trousers", "yt": "https://youtube.com/shorts/X54S1ZKNKNo", "affiliate": "https://ajiio.in/hm8nlwt", "store": "AJIO", "category": "Trousers"}, {"code": "LFM017", "name": "PERFORMAX Men Regular Fit Crew-Neck T-Shirt", "yt": "https://youtube.com/shorts/eAM59L6kUCk", "affiliate": "https://ajiio.in/7xY81kA", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM018", "name": "PUMA Men's Slim Fit Polo T-Shirt", "yt": "https://youtube.com/shorts/WFNFkdkPUmk", "affiliate": "https://ajiio.in/NelSc1y", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM019", "name": "KAPPA Regular Fit Polo T-Shirt", "yt": "https://youtube.com/shorts/csFz2Ji2TW4", "affiliate": "https://ajiio.in/8em6eJH", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM020", "name": "PERFORMAX Men Dual-Strap Sandals", "yt": "https://youtube.com/shorts/BPajO78EeL4", "affiliate": "https://ajiio.in/A6cLnxR", "store": "AJIO", "category": "Footwear"}, {"code": "LFM021", "name": "SNITCH Men Lightly-Washed Straight Fit Jeans", "yt": "https://youtube.com/shorts/QvMXBtKmcno", "affiliate": "https://ajiio.in/s10UunX", "store": "AJIO", "category": "Jeans"}, {"code": "LFM022", "name": "PERFORMAX Men Regular Fit Shorts", "yt": "https://youtube.com/shorts/OTHVp59BTs", "affiliate": "https://ajiio.in/Ouusp9r", "store": "AJIO", "category": "Shorts"}, {"code": "LFM023", "name": "Dockstreet Men Striped Black Track Pants", "yt": "https://youtube.com/shorts/NUBxZdJGsTM", "affiliate": "https://fktr.in/OuGo7te", "store": "Flipkart", "category": "Pants"}, {"code": "LFM024", "name": "NETPLAY Men Pack of 2 Ribbed Sleeveless Vests", "yt": "https://youtube.com/shorts/x1JFt7G4o3w", "affiliate": "https://ajiio.in/sEw2ri1", "store": "AJIO", "category": "Vests"}, {"code": "LFM025", "name": "MISCHIEF MONKEY Men Regular Fit Sweatshirt", "yt": "https://youtu.be/DbPsC8k3zpM", "affiliate": "https://ajiio.in/Kk2jSHG", "store": "AJIO", "category": "Sweatshirt"}];
-
-    function handleGlobalSearch(e) {
-        const query = e.target.value.toLowerCase().trim();
-        const resultsDiv = document.getElementById('global-search-results');
-        if (!resultsDiv) return;
-        
-        if (!query) {
-            resultsDiv.innerHTML = '';
-            resultsDiv.classList.add('hidden');
-            return;
-        }
-
-        const queryWords = query.split(/\s+/);
-        const filtered = globalProducts.filter(p => {
-            const combinedText = (p.name + ' ' + p.code + ' ' + p.store + ' ' + p.category).toLowerCase();
-            return queryWords.every(word => {
-                return combinedText.includes(word) || 
-                       word.split('').filter(char => combinedText.includes(word.replace(char, ''))).length > 0;
-            });
-        });
-
-        if (filtered.length === 0) {
-            resultsDiv.innerHTML = '<div class="p-3 text-[10px] uppercase tracking-wider text-brandSecondary">No matching pieces</div>';
-        } else {
-            let html = '';
-            filtered.forEach(p => {
-                html += `<a href="review-${p.code.toLowerCase()}.html" class="block p-3 border-b border-brandBorder hover:bg-brandBg transition-colors">
-                    <div class="flex items-center justify-between">
-                        <span class="font-serif text-xs text-brandPrimary uppercase">${p.name}</span>
-                        <span class="text-[9px] font-mono tracking-wider bg-brandBg px-1 border border-brandBorder text-brandSecondary">${p.code}</span>
-                    </div>
-                </a>`;
-            });
-            resultsDiv.innerHTML = html;
-        }
-        resultsDiv.classList.remove('hidden');
-    }
-
-    // Close results when clicking outside
-    document.addEventListener('click', function(event) {
-        const resultsDiv = document.getElementById('global-search-results');
-        const searchInput = document.getElementById('global-search');
-        if (resultsDiv && !resultsDiv.contains(event.target) && event.target !== searchInput) {
-            resultsDiv.classList.add('hidden');
-        }
-    });
-</script>
-
+            <div class="relative w-full max-w-xs sm:max-w-sm">
+                <input type="text" id="global-search" oninput="handleGlobalSearch(event)" placeholder="SEARCH DESIGNS..." 
+                       class="w-full bg-transparent border border-brandBorder px-4 py-2 text-xs focus:outline-none focus:border-brandPrimary transition-colors placeholder:text-gray-400 uppercase tracking-widest font-sans">
+                <div id="global-search-results" class="absolute left-0 right-0 mt-1 bg-white border border-brandBorder shadow-lg max-h-60 overflow-y-auto hidden z-50"></div>
+            </div>
 
             <nav class="hidden md:flex items-center space-x-8 lg:space-x-12 shrink-0">
                 <a href="index.html" class="text-xs uppercase tracking-widest font-medium text-brandPrimary border-b border-brandPrimary pb-1">Home</a>
                 <a href="reviews.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Reviews</a>
                 <a href="best-of.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Best Of</a>
                 <a href="blueprints.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Outfits</a>
-                <a href="guides.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Guides</a>
+                <a href="wardrobe-blueprints.html" class="text-xs uppercase tracking-widest font-medium text-brandSecondary hover:text-brandPrimary transition-colors">Wardrobe Matrix</a>
             </nav>
 
             <div class="flex items-center space-x-2">
@@ -133,7 +81,7 @@
             <a href="reviews.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Reviews</a>
             <a href="best-of.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Best Of</a>
             <a href="blueprints.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Outfits</a>
-            <a href="guides.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Guides</a>
+            <a href="wardrobe-blueprints.html" class="font-serif text-2xl tracking-wide text-brandSecondary hover:text-brandPrimary transition-colors pb-2">Wardrobe Matrix</a>
         </nav>
         <div class="border-t border-brandBorder pt-6">
             <p class="font-serif text-xs tracking-[0.25em] text-brandSecondary uppercase">Quality Over Quantity.</p>
@@ -154,8 +102,8 @@
                         <a href="reviews.html" class="min-h-[48px] sm:min-h-[52px] w-full flex items-center justify-center bg-brandPrimary text-white text-xs uppercase tracking-widest font-medium active:bg-opacity-80 transition-all">
                             Browse Reviews
                         </a>
-                        <a href="guides.html" class="min-h-[48px] sm:min-h-[52px] w-full flex items-center justify-center border border-brandPrimary text-brandPrimary text-xs uppercase tracking-widest font-medium active:bg-brandPrimary active:text-white transition-all">
-                            Explore Guides
+                        <a href="wardrobe-blueprints.html" class="min-h-[48px] sm:min-h-[52px] w-full flex items-center justify-center border border-brandPrimary text-brandPrimary text-xs uppercase tracking-widest font-medium active:bg-brandPrimary active:text-white transition-all">
+                            Wardrobe Matrix
                         </a>
                     </div>
                 </div>
@@ -177,9 +125,73 @@
                 <div><span class="font-serif text-2xl sm:text-4xl block mb-0.5">Honest</span><span class="text-[9px] sm:text-[10px] uppercase tracking-widest font-medium text-brandSecondary">Recommendations</span></div>
             </div>
         </section>
+
+        <!-- WARDROBE MATRIX HUB ENTRANCE -->
+        <section class="py-16 sm:py-24 border-b border-brandBorder">
+            <div class="bg-brandPrimary text-white p-8 sm:p-12 text-center rounded-sm shadow-xl max-w-4xl mx-auto">
+                <span class="text-[9px] font-mono tracking-widest uppercase bg-white text-brandPrimary px-2.5 py-1 rounded-xs mb-4 inline-block font-semibold">The Style Database</span>
+                <h2 class="font-serif text-3xl sm:text-4xl uppercase tracking-wide mb-3">Interactive Wardrobe Matrix</h2>
+                <p class="text-xs sm:text-sm text-brandSecondary max-w-xl mx-auto mb-8 font-light leading-relaxed">
+                    A comprehensive blueprint station for men's style. Filter breakdowns across skin tones, foundational shirt formulas, ideal shoe matching systems, and trouser geometries.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-3">
+                    <a href="wardrobe-blueprints.html" class="w-full sm:w-auto bg-white text-brandPrimary text-xs font-bold uppercase tracking-widest px-8 py-3.5 rounded-sm hover:bg-gray-100 transition-all text-center">
+                        Explore Blueprint Engines →
+                    </a>
+                    <a href="https://youtu.be/3zsghwrVgg8?si=ITrp42Dsn0MlNZ0b" target="_blank" class="w-full sm:w-auto border border-white/20 text-white text-xs font-bold uppercase tracking-widest px-8 py-3.5 rounded-sm hover:bg-white/10 transition-all text-center inline-flex justify-center items-center gap-2">
+                        Watch Masterclass
+                    </a>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- SEARCH & MENU SCRIPTS -->
     <script>
+        const globalProducts = [{"code": "LFM001", "name": "Snitch Twilight Blue Shirt", "yt": "https://youtube.com/shorts/cVrFyxfkVsA", "affiliate": "https://ajiio.in/Pkz8ur6", "store": "AJIO", "category": "Shirt"}, {"code": "LFM002", "name": "British Club Checked Slim Fit Shirt", "yt": "https://youtube.com/shorts/Ef-KsWv6m9k", "affiliate": "https://ajiio.in/bqRMXnK", "store": "AJIO", "category": "Shirt"}, {"code": "LFM003", "name": "Bene Kleed Beige Boot Cut Jeans", "yt": "https://youtube.com/shorts/QxsK3lHyLmg", "affiliate": "https://ajiio.in/m6PDE1y", "store": "AJIO", "category": "Jeans"}, {"code": "LFM004", "name": "Campus Sutra ripped shirt", "yt": "https://youtube.com/shorts/PHnAnxCAoNA", "affiliate": "https://ajiio.in/g7LvJuF", "store": "AJIO", "category": "Shirt"}, {"code": "LFM005", "name": "The Bear House Men Checked Slim Fit Shirt", "yt": "https://youtube.com/shorts/9Wq5vP-WVds", "affiliate": "https://ajiio.in/dd40lF7", "store": "AJIO", "category": "Shirt"}, {"code": "LFM006", "name": "BENE KLEED Men Mid Rise Jeans", "yt": "https://youtube.com/shorts/Ofq2dD6wUA", "affiliate": "https://ajiio.in/m6PDE1y", "store": "AJIO", "category": "Jeans"}, {"code": "LFM007", "name": "TEAMSPIRIT Men Regular Fit Polo T-Shirt", "yt": "https://youtube.com/shorts/UQFditSw85M", "affiliate": "https://ajiio.in/Th0DPJ1", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM008", "name": "Sparx Men Textured Thong Flip-Flops", "yt": "https://youtube.com/shorts/euW2tlpedw4", "affiliate": "https://myntr.it/6FVQ6kG", "store": "Myntra", "category": "Footwear"}, {"code": "LFM009", "name": "KOTTY Men Man Regular Fit Jeans", "yt": "https://youtube.com/shorts/1mncOSGu96l", "affiliate": "https://ajiio.in/6vl5L4D", "store": "AJIO", "category": "Jeans"}, {"code": "LFM010", "name": "TEAMSPIRIT Men Straight Fit Track Pants", "yt": "https://youtube.com/shorts/vhPRujBfvGc", "affiliate": "https://ajiio.in/OfxykxE", "store": "AJIO", "category": "Pants"}, {"code": "LFM011", "name": "YOUSTA Men Low-Top Lace-Up Sneakers", "yt": "https://youtube.com/shorts/FeXUB8eKI-0", "affiliate": "https://ajiio.in/c1YyGIC", "store": "AJIO", "category": "Footwear"}, {"code": "LFM012", "name": "HERE&NOW Men Opaque Casual Shirt", "yt": "https://youtube.com/shorts/BQ5-FVvdtM", "affiliate": "https://myntr.it/P4K2tZm", "store": "Myntra", "category": "Shirt"}, {"code": "LFM013", "name": "PERFORMAX Ultra Lightweight Running T-Shirt", "yt": "https://youtube.com/shorts/eXTPg-KBbts", "affiliate": "https://ajiio.in/QHdsiN7", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM014", "name": "HRX by Hrithik Roshan Mesh Running Shoes", "yt": "https://youtube.com/shorts/D3SjwXRRF2Y", "affiliate": "https://myntr.it/VbA6Y03", "store": "Myntra", "category": "Footwear"}, {"code": "LFM015", "name": "LEE COOPER Men Regular Fit Shirt", "yt": "https://youtube.com/shorts/XOUFJXSbTFI", "affiliate": "https://ajiio.in/1BXhxvw", "store": "AJIO", "category": "Shirt"}, {"code": "LFM016", "name": "ARROW Men Tapered Fit Trousers", "yt": "https://youtube.com/shorts/X54S1ZKNKNo", "affiliate": "https://ajiio.in/hm8nlwt", "store": "AJIO", "category": "Trousers"}, {"code": "LFM017", "name": "PERFORMAX Men Regular Fit Crew-Neck T-Shirt", "yt": "https://youtube.com/shorts/eAM59L6kUCk", "affiliate": "https://ajiio.in/7xY81kA", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM018", "name": "PUMA Men's Slim Fit Polo T-Shirt", "yt": "https://youtube.com/shorts/WFNFkdkPUmk", "affiliate": "https://ajiio.in/NelSc1y", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM019", "name": "KAPPA Regular Fit Polo T-Shirt", "yt": "https://youtube.com/shorts/csFz2Ji2TW4", "affiliate": "https://ajiio.in/8em6eJH", "store": "AJIO", "category": "T-Shirt"}, {"code": "LFM020", "name": "PERFORMAX Men Dual-Strap Sandals", "yt": "https://youtube.com/shorts/BPajO78EeL4", "affiliate": "https://ajiio.in/A6cLnxR", "store": "AJIO", "category": "Footwear"}, {"code": "LFM021", "name": "SNITCH Men Lightly-Washed Straight Fit Jeans", "yt": "https://youtube.com/shorts/QvMXBtKmcno", "affiliate": "https://ajiio.in/s10UunX", "store": "AJIO", "category": "Jeans"}, {"code": "LFM022", "name": "PERFORMAX Men Regular Fit Shorts", "yt": "https://youtube.com/shorts/OTHVp59BTs", "affiliate": "https://ajiio.in/Ouusp9r", "store": "AJIO", "category": "Shorts"}, {"code": "LFM023", "name": "Dockstreet Men Striped Black Track Pants", "yt": "https://youtube.com/shorts/NUBxZdJGsTM", "affiliate": "https://fktr.in/OuGo7te", "store": "Flipkart", "category": "Pants"}, {"code": "LFM024", "name": "NETPLAY Men Pack of 2 Ribbed Sleeveless Vests", "yt": "https://youtube.com/shorts/x1JFt7G4o3w", "affiliate": "https://ajiio.in/sEw2ri1", "store": "AJIO", "category": "Vests"}, {"code": "LFM025", "name": "MISCHIEF MONKEY Men Regular Fit Sweatshirt", "yt": "https://youtu.be/DbPsC8k3zpM", "affiliate": "https://ajiio.in/Kk2jSHG", "store": "AJIO", "category": "Sweatshirt"}];
+
+        function handleGlobalSearch(e) {
+            const query = e.target.value.toLowerCase().trim();
+            const resultsDiv = document.getElementById('global-search-results');
+            if (!resultsDiv) return;
+            
+            if (!query) {
+                resultsDiv.innerHTML = '';
+                resultsDiv.classList.add('hidden');
+                return;
+            }
+
+            const queryWords = query.split(/\s+/);
+            const filtered = globalProducts.filter(p => {
+                const combinedText = (p.name + ' ' + p.code + ' ' + p.store + ' ' + p.category).toLowerCase();
+                return queryWords.every(word => combinedText.includes(word));
+            });
+
+            if (filtered.length === 0) {
+                resultsDiv.innerHTML = '<div class="p-3 text-[10px] uppercase tracking-wider text-brandSecondary">No matching pieces</div>';
+            } else {
+                let html = '';
+                filtered.forEach(p => {
+                    html += `<a href="review-${p.code.toLowerCase()}.html" class="block p-3 border-b border-brandBorder hover:bg-brandBg transition-colors">
+                        <div class="flex items-center justify-between">
+                            <span class="font-serif text-xs text-brandPrimary uppercase">${p.name}</span>
+                            <span class="text-[9px] font-mono tracking-wider bg-brandBg px-1 border border-brandBorder text-brandSecondary">${p.code}</span>
+                        </div>
+                    </a>`;
+                });
+                resultsDiv.innerHTML = html;
+            }
+            resultsDiv.classList.remove('hidden');
+        }
+
+        document.addEventListener('click', function(event) {
+            const resultsDiv = document.getElementById('global-search-results');
+            const searchInput = document.getElementById('global-search');
+            if (resultsDiv && !resultsDiv.contains(event.target) && event.target !== searchInput) {
+                resultsDiv.classList.add('hidden');
+            }
+        });
+
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         const line1 = document.getElementById('line1');
